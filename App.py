@@ -21,5 +21,5 @@ st.set_page_config(
 
 style()
 
-st.markdown(f'# <img src="" alt="Ikea Logo" width=100/> Ikea App Home',unsafe_allow_html=True)
+st.markdown(f'# <img src="https://raw.githubusercontent.com/elghallali/ikea-app-product/master/images/ikea-logo.png" alt="Ikea Logo" width=100/> Ikea App Home',unsafe_allow_html=True)
 
