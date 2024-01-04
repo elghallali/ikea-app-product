@@ -31,8 +31,8 @@ st.header('Dataset')
 
 def visualDataFrame(df):
     options = st.multiselect(
-        '',
-        list(df.columns),list(df.columns))
+        'Select columns',
+        list(df.columns),list(df.columns),label_visibility="hidden")
     tab1, tab2, tab3, tab4 = st.tabs([":card_file_box: Data", "Types", 'NAN', 'Info'])
     with tab1:
         st.subheader("A tab with a data")
