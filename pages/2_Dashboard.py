@@ -37,8 +37,14 @@ GROUP BY name , price
     histogram(x=price_for_products['Produits'],y=price_for_products['Price'],title='prix par produit')
 
     
-#with cols1[1]:    
-    #scatter()
+with cols1[1]:
+    nueage_du_point_query= f'''
+    SELECT width AS Width, height AS Height, depth AS Depth, name AS Produit
+    FROM data
+
+'''
+    nueage_du_point = duckdb_connection.execute(nueage_du_point_query).df()   
+    scatter(nueage_du_point, 'Width', 'Height', 'Produit', 'Depth')
 with cols1[2]:
     price=f'''
 SELECT name AS Produits, category AS Category FROM data 
@@ -57,6 +63,15 @@ GROUP BY price , category
     boxPlot(x=price_for_category['prix'],y=price_for_category['Category'],df=price_for_category)
     
 with cols2[1]:
-    category = ['Sky', 'Shady side of a pyramid', 'Sunny side of a pyramid']
-    df = pd.DataFrame({'category': category, 'value': [75, 10, 15]})
-    pie(df,'category','value')
+    # Sample DuckDB query
+    sellable_online_category_query = """
+    SELECT sellable_online, category AS Category, COUNT(*) AS count
+    FROM data
+    GROUP BY sellable_online, category;
+    """
+
+    # Execute the query and obtain a DataFrame
+    sellable_online_category = duckdb_connection.execute(sellable_online_category_query).df()
+
+    # Use the pie function with the DuckDB data
+    pie(sellable_online_category, 'Category', 'count')
